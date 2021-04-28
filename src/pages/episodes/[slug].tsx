@@ -11,9 +11,9 @@ import { convertDurationToTimeString } from "../../Utils/convertDurationToTimeSt
 import styles from './episode.module.scss';
 import React, { useContext } from 'react';
 import { PlayerContext, usePlayer } from '../../Contexts/PlayerContext';
-import { Head } from 'next/document';
+import Head from 'next/head';
 
-type Episode = {
+ type Episode = {
     id:string;
     title:string;
     thumbnail: string;
@@ -36,10 +36,11 @@ export default function Episode({episode} : EpisodeProps){
     const {play} = usePlayer();
 
     return(
-      <div className={styles.episode}>
+
+       <div className={styles.episode}>
             <Head>
                <title>{episode.title} | Podcastr</title>
-           </Head>
+            </Head> 
           <div className={styles.thumbnailContainer}>
               <Link href='/'>
                 <button type="button">
@@ -60,7 +61,7 @@ export default function Episode({episode} : EpisodeProps){
           </header>
 
           <div className={styles.description} dangerouslySetInnerHTML={{__html: episode.description}}/>
-      </div>  
+      </div>   
     )
 }
 
@@ -110,4 +111,4 @@ export const getStaticProps : GetStaticProps = async (ctx) => {
         },
         revalidate: 60 *60 *24, // Recarrega a Page 24hours
     }
-}
+} 
